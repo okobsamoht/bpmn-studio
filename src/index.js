@@ -24,6 +24,11 @@ const createWindow = () => {
   //mainWindow.webContents.openDevTools();
   mainWindow.removeMenu()
   mainWindow.setMenu(electron.Menu.buildFromTemplate([]))
+
+  mainWindow.on('close', function(e) {
+    e.preventDefault();
+    mainWindow.destroy();
+  });
 };
 
 // This method will be called when Electron has finished
