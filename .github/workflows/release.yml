@@ -1,0 +1,76 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]*.[0-9]*.[0-9]*'
+
+permissions:
+  contents: write  # needed to create GitHub releases
+
+jobs:
+  release:
+    name: Package & Release (${{ matrix.name }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            name: Linux
+            electron_args: --linux
+          - os: macos-latest
+            name: macOS
+            electron_args: --mac
+          - os: windows-latest
+            name: Windows
+            electron_args: --win
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # macOS: convert iconset → .icns using system iconutil
+      - name: Generate macOS icon (.icns)
+        if: runner.os == 'macOS'
+        run: |
+          node scripts/generate-icons.js
+          iconutil -c icns build/icon.iconset -o build/icon.icns
+
+      # Other platforms: just generate icons
+      - name: Generate icons
+        if: runner.os != 'macOS'
+        run: node scripts/generate-icons.js
+
+      - name: Build (production)
+        run: npm run build:prod
+
+      - name: Package (${{ matrix.name }})
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Disable code signing – remove these lines if you configure certificates
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+          WIN_CSC_LINK: ''
+        run: npx electron-builder ${{ matrix.electron_args }} -p always
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpmn-studio-${{ matrix.name }}
+          path: |
+            release/*.dmg
+            release/*.zip
+            release/*.exe
+            release/*.AppImage
+            release/*.deb
+          if-no-files-found: ignore
+          retention-days: 30
