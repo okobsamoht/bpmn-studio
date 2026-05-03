@@ -32,5 +32,5 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 - GitHub Actions CI (build matrix across all three platforms)
 - GitHub Actions release pipeline (triggered by version tags)
 
-[Unreleased]: https://github.com/bokothomas/bpmn-studio/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/bokothomas/bpmn-studio/releases/tag/v1.0.0
+[Unreleased]: https://github.com/okobsamoht/bpmn-studio/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/okobsamoht/bpmn-studio/releases/tag/v1.0.0

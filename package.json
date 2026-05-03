@@ -10,9 +10,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bokothomas/bpmn-studio.git"
+    "url": "https://github.com/okobsamoht/bpmn-studio.git"
   },
-  "homepage": "https://github.com/bokothomas/bpmn-studio",
+  "homepage": "https://github.com/okobsamoht/bpmn-studio",
   "scripts": {
     "generate-icons": "node scripts/generate-icons.js",
     "build": "npm run generate-icons && webpack --config webpack.main.config.js && webpack --config webpack.renderer.config.js",
