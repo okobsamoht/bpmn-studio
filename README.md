@@ -2,7 +2,7 @@
 
 A professional desktop application for designing, validating, and simulating BPMN 2.0 business process diagrams. Built with Electron, React, and the powerful bpmn.io open source ecosystem.
 
-![BPMN Studio Screenshot](./landing/index.html)
+![BPMN Studio Screenshot](./docs/index.html)
 
 ---
 
@@ -53,7 +53,7 @@ bpmn-studio/
 │       │   └── WelcomeScreen.jsx  # Empty-state screen shown when no diagram is open
 │       └── styles/
 │           └── app.css      # All application styles (single CSS file, CSS variables)
-├── landing/
+├── docs/
 │   └── index.html           # Standalone marketing / product landing page
 ├── dist/                    # Build output (git-ignored)
 │   ├── main/
@@ -271,7 +271,7 @@ new BpmnModeler({
 
 ## Landing Page
 
-A standalone marketing page is available at `landing/index.html`. It is a self-contained single-file HTML page with no external dependencies — open it in any browser.
+A standalone marketing page is available at `docs/index.html`. It is a self-contained single-file HTML page with no external dependencies — open it in any browser.
 
 ---
 
